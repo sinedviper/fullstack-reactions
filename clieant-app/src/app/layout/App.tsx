@@ -4,21 +4,28 @@ import { Container} from "semantic-ui-react";
 
 import NavBar from "./NavBar";
 import HomePage from "../../features/home/HomePage.tsx";
+import {ToastContainer} from "react-toastify";
 
 function App() {
   const location = useLocation();
 
-  return location.pathname === "/" ?
-      <HomePage />
-      :
-      (
-          <>
-            <NavBar />
-            <Container style={{marginTop: "7em"}}>
-              <Outlet />
-            </Container>
-          </>
-      )
+  return (
+      <>
+          <ToastContainer position={"bottom-right"} hideProgressBar theme={"colored"} />
+          {location.pathname === "/" ?
+              <HomePage />
+              :
+              (
+                  <>
+                      <NavBar />
+                      <Container style={{marginTop: "7em"}}>
+                          <Outlet />
+                      </Container>
+                  </>
+              )
+          }
+      </>
+  )
 }
 
 export default observer(App);
