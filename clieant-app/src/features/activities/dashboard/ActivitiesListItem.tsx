@@ -1,25 +1,15 @@
-import { SyntheticEvent, useState } from "react";
 import {Button, Icon, Item, Segment} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {observer} from "mobx-react-lite";
+import {format} from "date-fns";
 
 import {Activity} from "../../../app/models/activity.ts";
-import {useStore} from "../../../app/stores/store.ts";
 
 interface Props {
     activity: Activity
 }
 
 export default observer(function ActivitiesListItem({activity}:Props) {
-    const {activityStore} = useStore();
-    const {loading, deleteActivity} = activityStore;
-
-    const [target, setTarget] = useState("");
-
-    function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string): void {
-        setTarget(e.currentTarget.name);
-        deleteActivity(id);
-    }
 
     return (
         <Segment.Group>
@@ -37,7 +27,7 @@ export default observer(function ActivitiesListItem({activity}:Props) {
             </Segment>
             <Segment>
                 <span>
-                    <Icon name={"clock"} /> {activity.date}
+                    <Icon name={"clock"} /> {format(activity.date!, "dd MMM yyyy h:mm aa")}
                     <Item name={"marker"} /> {activity.venue}
                 </span>
             </Segment>
