@@ -10,4 +10,8 @@
       <Folder Include="bin\Debug\net7.0\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.0" />
+    </ItemGroup>
+
 </Project>
