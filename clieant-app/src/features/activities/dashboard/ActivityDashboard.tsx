@@ -1,34 +1,34 @@
-import { Grid } from "semantic-ui-react"
-import {observer} from "mobx-react-lite";
-import {useEffect} from "react";
+import { Grid } from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
-import ActivityList from "./ActivityList"
-import {useStore} from "../../../app/stores/store.ts";
+import ActivityList from "./ActivityList";
+import { useStore } from "../../../app/stores/store.ts";
 import LoadingComponent from "../../../app/layout/LoadingComponent.tsx";
 import ActivityFilters from "./ActivityFilters.tsx";
 
 export default observer(function ActivityDashboard() {
-    const {activityStore} = useStore();
-    const {loadActivities, activityRegistry} = activityStore;
+  const { activityStore } = useStore();
+  const { loadActivities, activityRegistry } = activityStore;
 
-    useEffect(() => {
-        if(activityRegistry.size === 0) {
-            loadActivities()
-        }
-    }, [loadActivities, activityRegistry.size]);
-
-    if(activityStore.loadingInitial) {
-        return <LoadingComponent />
+  useEffect(() => {
+    if (activityRegistry.size === 0) {
+      loadActivities();
     }
-    
-    return (
-        <Grid>
-            <Grid.Column width={"10"}>
-                <ActivityList />
-            </Grid.Column>
-            <Grid.Column width={"6"}>
-                <ActivityFilters />
-            </Grid.Column>
-        </Grid>
-    )
-})
+  }, [loadActivities, activityRegistry.size]);
+
+  if (activityStore.loadingInitial) {
+    return <LoadingComponent />;
+  }
+
+  return (
+    <Grid>
+      <Grid.Column width={"10"}>
+        <ActivityList />
+      </Grid.Column>
+      <Grid.Column width={"6"}>
+        <ActivityFilters />
+      </Grid.Column>
+    </Grid>
+  );
+});
